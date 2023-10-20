@@ -1,0 +1,177 @@
+.wd-nav-bar {
+    background-color: black;
+    width : 85px;
+    text-align: center;
+    height: 100%;
+    color: white;
+    font-size: 90%;
+}
+
+.wd-nav-bar-item {
+    border : 0px;
+    background-color: inherit;
+    color: inherit;
+    text-align: center;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    padding: 7px;
+}
+
+.wd-nav-bar-item.active {
+    background-color: white;
+    color: red;
+}
+
+.wd-nav-bar-link {
+    text-decoration: none;
+    color: white;
+}
+
+.wd-nav-bar-active-link {
+    color:red;
+}
+
+/*************************************************************/
+.wd-secondary-nav {
+    color: red;
+    text-align: left;
+    width : 200px;
+    padding-left: 20px;
+}
+.wd-secondary-nav-item {
+    text-align: inherit;
+    color:red;
+    border: none;
+}
+.wd-secondary-nav-item.active {
+    color: black;
+    border-left: solid;
+    background-color: white;
+}
+.wd-secondary-nav-link {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.wd-secondary-nav-link-active {
+    color:black;
+}
+/*************************************************************/
+
+.wd-dashboard-card {
+    width : 250px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+/*************************************************************/
+
+.wd-flex-row-container {
+    display: flex;
+    flex-direction: row;
+  }
+  .wd-flex-grow-1 {
+    flex-grow: 1;
+  }
+  
+
+/*************************************************************/
+
+.wd-red-icon {
+    color: red;
+    margin: 7px;
+    padding: 7px;
+}
+
+.wd-icon {
+    margin: 7px;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+
+.wd-small-select {
+    width : 150px;
+}
+
+.wd-search-for-assignments {
+    width:200px;
+}
+.wd-assignment-big-list {
+    background-color: #ddd;
+    border-radius: 0px;
+}
+
+
+.wd-assignment-link {
+    color: black;
+}
+
+.wd-left-green {
+    border-left: solid;
+    border-left-width: 6px;
+    border-left-color: green;
+}
+
+.wd-ellipsis {
+    color: black;
+}
+
+.wd-check {
+    color: lightgreen;
+}
+
+.northeastern-img {
+    width: 65px;
+}
+.wd-btn {
+    background-color: #ddd;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.wd-right-align {
+    text-align: end;
+}
+
+.wd-assign-border {
+    border: solid;
+    border-color: #ccc;
+    padding:5%
+}
+
+.wd-bold {
+    font-weight: bold;
+}
+
+.wd-small-top {
+    background-color: black;
+    color:white;
+    text-align: center;
+}
+
+.wd-janky-menu-links {
+    color: white;
+}
+
+.wd-small-menu-links {
+    color:red
+}
+
+.wd-small-top-icon {
+    color: white;
+}
+
+.wd-breadcrumb {
+    --bs-breadcrumb-divider: '>';
+}
+
+.wd-link-styling{
+    color:red;
+    
+}
