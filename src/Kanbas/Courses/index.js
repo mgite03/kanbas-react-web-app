@@ -9,10 +9,10 @@ import AssignmentEditor from "./Assignments/AssignmentEditor";
 import Grades from "./Grades";
 
 
-function Courses() {
+function Courses({ courses }) {
     const {pathname} = useLocation();
     const { courseId } = useParams();
-    const course = db.courses.find((course) => course._id === courseId);
+    const course = courses.find((course) => course._id === courseId);
     const breadcrumbStr = pathname.substring(pathname.lastIndexOf("/") + 1);
     return (
     <div> 
