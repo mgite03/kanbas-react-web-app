@@ -1,4 +1,3 @@
-import db from "../../Kanbas/Database";
 import { useParams, Navigate, Route, Routes, useLocation, Link } from "react-router-dom";
 import CourseNavigation from "./CourseNavigation";
 import {GiHamburgerMenu} from 'react-icons/gi';

@@ -4,11 +4,12 @@ import db from "../../Database";
 import { AiOutlinePlus } from 'react-icons/ai';
 import { FaEllipsisVertical, FaCircleCheck } from 'react-icons/fa6';
 import { FaEdit, FaGripVertical} from 'react-icons/fa';
+import { useSelector } from "react-redux";
 
 
 function Assignments() {
   const { courseId } = useParams();
-  const assignments = db.assignments;
+  const assignments = useSelector((state) => state.assignmentsReducer.assignments);
   const courseAssignments = assignments.filter(
     (assignment) => assignment.course === courseId);
 
@@ -55,7 +56,7 @@ function Assignments() {
         </div>
         <div class="wd-flex-children wd-flex-grow-1"></div>
         <div class="wd-flex-children"><button class="btn wd-btn float-end"><i class="wd-icon me-2"><AiOutlinePlus/></i>Group</button></div>
-        <div class="wd-flex-children"><button class="btn btn-danger float-end"><i class="wd-icon"><AiOutlinePlus/></i>Assignment</button></div>
+        <div class="wd-flex-children"><Link to={`/Kanbas/Courses/${courseId}/Assignments/newAssignment`} className="btn btn-danger float-end"><i class="wd-icon"><AiOutlinePlus/></i>Assignment</Link></div>
         <div class="wd-flex-children"><button class="btn wd-btn float-end"><i class="wd-icon"><FaEllipsisVertical/></i></button></div>
       </div>
       <hr/>

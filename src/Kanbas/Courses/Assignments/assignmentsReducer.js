@@ -4,7 +4,7 @@ import db from "../../Database";
 
 const initialState = {
   assignments: db.assignments,
-  assignment: { name: "New Assignment", description: "New Assignment Description" },
+  assignment: { title: "New Assignment", description: "New Assignment Description", type: "assignment", due:"Nov 2 at 11:59pm" },
 };
 
 
@@ -32,9 +32,9 @@ const assignmentsSlice = createSlice({
         }
     });
     },
-setModule: (state, action) => {
-  state.assignment = action.payload;
-},
+    setAssignment: (state, action) => {
+      state.assignment = action.payload;
+    },
 },
 });
 
