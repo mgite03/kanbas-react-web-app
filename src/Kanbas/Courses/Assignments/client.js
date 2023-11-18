@@ -1,6 +1,9 @@
 import axios from "axios";
-const COURSES_URL = "http://localhost:4000/api/courses";
-const ASSIGNMENTS_URL = "http://localhost:4000/api/assignments";
+// const COURSES_URL = "http://localhost:4000/api/courses";
+// const ASSIGNMENTS_URL = "http://localhost:4000/api/assignments";
+const API_BASE = process.env.REACT_APP_API_BASE;
+const ASSIGNMENTS_URL = `${API_BASE}/assignments`;
+const COURSES_URL = `${API_BASE}/courses`;
 export const createAssignment = async (courseId, assignment) => {
     const response = await axios.post(`${COURSES_URL}/${courseId}/assignments`, assignment);
     return response.data;
