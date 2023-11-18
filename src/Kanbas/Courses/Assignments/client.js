@@ -20,5 +20,3 @@ export const deleteAssignment = async (assignmentId) => {
     const response = await axios.delete(`${ASSIGNMENTS_URL}/${assignmentId}`);
     return response.data;
 }
-
-
