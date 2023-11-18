@@ -1,17 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { FaGripVertical, FaCheckCircle, FaRegCheckCircle } from 'react-icons/fa';
 import { FaEllipsisVertical } from 'react-icons/fa6'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useSelector, useDispatch } from "react-redux";
-import { addModule, deleteModule, updateModule, setModule, } from "./modulesReducer";
+import { addModule, deleteModule, updateModule, setModule, setModules} from "./modulesReducer";
+import * as client from "./client";
 
 
 function ModuleList() {
   const { courseId } = useParams();
+  useEffect (() => {
+    client.findModulesForCourse(courseId).then((modules) => dispatch(setModules(modules)));
+  }, [courseId])
   const modules = useSelector((state) => state.modulesReducer.modules);
   const module = useSelector((state) => state.modulesReducer.module);
   const dispatch = useDispatch();
+
+  const handleUpdateModule = async () => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  }
+
+  const handleDeleteModule = (moduleId) => {
+    client.deleteModule(moduleId).then((status) =>{
+        dispatch(deleteModule(moduleId));
+    });
+  };
+
+  const handleAddModule = () => {
+    client.createModule(courseId, module).then((module) => {
+        dispatch(addModule(module));
+    });
+  };
   
   return (
     <div> 
@@ -31,7 +52,7 @@ function ModuleList() {
                 </ul>
             </div>
             <div class="wd-flex-children">
-                <button class="btn btn-danger float-end">+ Module</button>
+                <button onClick={handleAddModule} class="btn btn-danger float-end">+ Module</button>
             </div>
             <div class="wd-flex-children">
                 <button class="btn wd-btn float-end"><FaEllipsisVertical/></button>
@@ -47,8 +68,8 @@ function ModuleList() {
           onChange={(e) => dispatch(setModule({
             ...module, description: e.target.value }))}
         />
-        <button className="btn wd-btn"  onClick={() => dispatch(addModule({ ...module, course: courseId }))}>Add</button>
-        <button onClick={() => dispatch(updateModule(module))} className="btn wd-btn"> Update</button>
+        <button className="btn wd-btn"  onClick={handleAddModule}>Add</button>
+        <button onClick={handleUpdateModule} className="btn wd-btn"> Update</button>
 
 
     <ul className="list-group mt-5 ms-5 me-5 mb-5">
@@ -74,7 +95,7 @@ function ModuleList() {
                 </div>
                 <div className="wd-flex-children">
                 <button className="btn btn-secondary me-3"
-                    onClick={() => dispatch(deleteModule(module._id))}>
+                    onClick={() => handleDeleteModule(module._id)}>
                     Delete
                 </button>
 

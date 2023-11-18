@@ -2,29 +2,41 @@ import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, setAssignment, updateAssignment } from "../assignmentsReducer.js";
+import * as client from "../client.js";
 
 
 function AssignmentEditor() {
   const { assignmentId } = useParams();
-  const assignments = useSelector((state) => state.assignmentsReducer.assignments);
-  const defaultAssignment = useSelector((state) => state.assignmentsReducer.assignment);
-  const assignment = assignmentId === "newAssignment" ? defaultAssignment : assignments.find(
-    (assignment) => assignment._id === assignmentId)  
-  const editing = !(assignmentId === "newAssignment")
+//   const assignments = useSelector((state) => state.assignmentsReducer.assignments);
+  const assignment = useSelector((state) => state.assignmentsReducer.assignment);
   const dispatch = useDispatch();
+//   const assignment = assignmentId === "newAssignment" ? defaultAssignment : assignments.find(
+//     (assignment) => assignment._id === assignmentId)  
+//   const assignment = assignmentId === "newAssignment" ? dispatch(setAssignment(defaultAssignment)) : dispatch(setAssignment(assignments.find((assignment) => assignment._id === assignmentId)));
+  const editing = !(assignmentId === "newAssignment")
 
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  dispatch(setAssignment(assignment)); // ?
+  const handleAddAssignment = () => {
+    client.createAssignment(courseId, assignment).then((assignment) => {
+        dispatch(addAssignment(assignment));
+    });
+  };
+
+  const handleUpdateAssignment = async () => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  }
+
   const handleSave = () => {
     if (editing){
-        dispatch(updateAssignment({...assignment, course: courseId}));
+        handleUpdateAssignment();
     } else {
-        dispatch(addAssignment({ ...assignment, course: courseId})); 
+        handleAddAssignment(); 
     }
-    console.log("Added the following object to th list");
-    console.log({...assignment, course: courseId });
+    // console.log("Added the following object to th list");
+    // console.log({...assignment, course: courseId });
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
@@ -33,8 +45,9 @@ function AssignmentEditor() {
   <p>Assignment Name</p>
   <input className="form-control mb-2"
         value={assignment.title}
-        onChange={(e) => dispatch(setAssignment({
-            ...assignment, title: e.target.value }))}
+        onChange={(e) => {
+            dispatch(setAssignment({
+            ...assignment, title: e.target.value }));}}
         />
   <textarea className="form-control mb-4"
         value={assignment.description}
