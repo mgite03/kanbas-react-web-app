@@ -36,7 +36,7 @@ function UserTable() {
     const deleteUser = async (user) => {
         try {
             await client.deleteUser(user);
-            setUsers(users.filter((u) => u._id == user._id));
+            setUsers(users.filter((u) => u._id !== user._id));
         } catch (err) {
             console.log(err);
         }
@@ -77,7 +77,7 @@ function UserTable() {
                 </button>
             </td>
             <td>
-                <button  onClick={createUser} className="btn">
+                <button  onClick={createUser} className="btn me-2 fs-1 text-primary text">
                     <BsPlusCircleFill/>
               </button>
             </td>

@@ -7,8 +7,8 @@ function Account (){
     const [account, setAccount] = useState(null);
     const navigate = useNavigate();
     const fetchAccount = async  () => {
-        const account = await client.account();
-        setAccount(account);
+        const fetchedAccount = await client.account();
+        setAccount(fetchedAccount);
     }
     const findUserWithId = async (id) => {
         const user = await client.findUserById(id);
@@ -28,6 +28,10 @@ function Account (){
         await client.signout();
         navigate("/kanbas/signin");
     }
+
+    const dateToValue = (date) => {
+        return date ? date.toString().substring(0,10) : "";
+    }
     return (
         <div className="w-50">
             <h1>Account</h1> 
@@ -36,9 +40,9 @@ function Account (){
                     <input className="form-control mb-3" value={account.password} type="text" onChange={(e) => setAccount({...account, password: e.target.value})}/>
                     <input className="form-control mb-3" value={account.firstName} type="text" onChange={(e) => setAccount({...account, firstName:e.target.value})}/>
                     <input className="form-control mb-3" value={account.lastName} type="text" onChange={(e) => setAccount({...account, lastName: e.target.value})}/>
-                    <input className="form-control mb-3" value={account.dob} type="date" onChange={(e) => setAccount({...account, dob: e.target.value})}/>
+                    <input className="form-control mb-3" value={dateToValue(account.dob)} type="date" onChange={(e) => setAccount({...account, dob: e.target.value})}/>
                     <input className="form-control mb-3" value={account.email} type="email" onChange={(e) => setAccount({...account, email:e.target.value})}/>
-                    <select className="form-select mb-3" onChange={(e) => setAccount({...account, role: e.target.value})}>
+                    <select className="form-select mb-3" value={account.role} onChange={(e) => setAccount({...account, role: e.target.value})}>
                         <option value="USER">User</option>
                         <option value="ADMIN">Admin</option>
                         <option value="FACULTY">Faculty</option>
