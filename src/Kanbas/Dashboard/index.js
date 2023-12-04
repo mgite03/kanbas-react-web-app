@@ -45,6 +45,9 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
     return (
     <div>
       <h3 class="ms-3 mt-3">Dashboard</h3>
+      <Link className="btn wd-btn float-end" to="/kanbas/signin">
+        Signin
+      </Link>
       <hr/>
       <div className="container">
         <h4>Published Courses({coursesLength})</h4>

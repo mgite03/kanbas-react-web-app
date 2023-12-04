@@ -9,6 +9,10 @@ import { useEffect, useState } from "react";
 import store from "./store";
 import { Provider } from "react-redux";
 import axios from "axios";
+import Signin from "../users/signin";
+import Account from "../users/account";
+import UserTable from "../users/table";
+import Signup from "../users/signup";
 
 function Kanbas() {
   const [courses, setCourses] = useState([]);
@@ -16,7 +20,7 @@ function Kanbas() {
   const URL = `${API_BASE}/courses`;
 
 
-  const findAllCourses = async() => {
+  const findAllCourses = async () => {
     const response = await axios.get(URL);
     setCourses(response.data);
   };
@@ -58,7 +62,7 @@ function Kanbas() {
         <div class="wd-flex-children wd-flex-grow-1">
         <Routes>
           <Route path="/" element={<Navigate to="Dashboard" />} />
-          <Route path="Account" element={<h1>Account</h1>} />
+          {/* <Route path="Account" element={<h1>Account</h1>} /> */}
           <Route path="Dashboard" element={<Dashboard
               courses={courses}
               course={course}
@@ -67,6 +71,11 @@ function Kanbas() {
               deleteCourse={deleteCourse}
               updateCourse={updateCourse}/>} />
           <Route path="Courses/:courseId/*" element={<Courses courses={courses}/>} />
+          <Route path="/signin" element={<Signin/>} />
+          <Route path="/account" element={<Account/>}/>
+          <Route path="/admin/users" element={<UserTable/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/account/:id" element={<Account/>}/>
         </Routes>
 
         </div>
@@ -74,4 +83,4 @@ function Kanbas() {
       </Provider>
    );
  }
- export default Kanbas
+ export default Kanbas;
